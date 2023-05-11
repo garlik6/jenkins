@@ -1,0 +1,11 @@
+<?php
+$db_host = '{{ mysql_host }}';
+$db_user = '{{ mysql_user }}';
+$db_pass = '{{ mysql_password }}';
+$db_name = '{{ mysql_database }}';
+
+$conn = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
+
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}

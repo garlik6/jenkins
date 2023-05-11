@@ -1,0 +1,18 @@
+---
+- name: Install Apache web server and connect it to a MySQL database
+  hosts: docker_host
+  become: true
+  roles:
+    - apache-mysql
+  vars:
+    mysql_host: 79.137.157.14
+    mysql_user: myuser
+    mysql_password: mypassword
+    mysql_database: mydatabase
+
+  handlers:
+  - name: Restart Apache
+    service:
+      name: apache2
+      state: restarted
+
