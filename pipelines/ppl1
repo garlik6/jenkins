@@ -6,11 +6,19 @@ pipeline {
     stages {
         stage('select') {
             steps {
-                script {
-                    def result = sh(returnStdout: true, script: "mysql -u myuser -pmypassword -h 192.168.1.118 -e 'SELECT * FROM mydatabase.${params.tableName};'").trim()
-                    println(result)
+                withCredentials([usernamePassword(credentialsId: 'mysql-creds', passwordVariable: 'MYSQL_PASSWORD', usernameVariable: 'MYSQL_USER')]) {
+                    script {
+                        def result = sh(returnStdout: true, script: "mysql -u ${MYSQL_USER} -p${MYSQL_PASSWORD} -h 192.168.1.118 -e 'SELECT * FROM mydatabase.${params.tableName};'").trim()
+                        println(result)
+                    }
                 }
             }
+        }
+    }
+    
+    post {
+        always {
+            cleanWs()  
         }
     }
 }

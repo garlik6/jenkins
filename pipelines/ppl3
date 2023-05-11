@@ -4,9 +4,17 @@ pipeline {
     stages {
         stage('Dump') {
             steps {
-                sh 'mysqldump -u myuser -pmypassword --all-databases -h 192.168.1.118 > databases.sql'
-                archiveArtifacts artifacts: "databases.sql", followSymlinks: false
+                withCredentials([usernamePassword(credentialsId: '2', passwordVariable: 'mypassword', usernameVariable: 'myuser')]) {
+                    sh "mysqldump -u $myuser -p$mypassword --all-databases -h 192.168.1.118 > databases.sql"
+                    archiveArtifacts artifacts: "databases.sql", followSymlinks: false
+                }
             }
+        }
+    }
+    
+    post {
+        always {
+            cleanWs()
         }
     }
 }
