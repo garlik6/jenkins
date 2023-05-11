@@ -1,0 +1,16 @@
+pipeline {
+    agent any
+    parameters {
+        string(name: "tableName", defaultValue: "users", trim: true, description: "Type table name")
+    }
+    stages {
+        stage('select') {
+            steps {
+                script {
+                    def result = sh(returnStdout: true, script: "mysql -u myuser -pmypassword -h 192.168.1.118 -e 'SELECT * FROM mydatabase.${params.tableName};'").trim()
+                    println(result)
+                }
+            }
+        }
+    }
+}
