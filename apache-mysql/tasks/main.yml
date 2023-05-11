@@ -16,7 +16,7 @@
 
 - name: Copy Apache configuration file
   template:
-    src: /home/grigory/apache-mysql/templates/apache.conf.j2
+    src: /templates/apache.conf.j2
     dest: /etc/apache2/sites-available/000-default.conf
     mode: 0644
 
