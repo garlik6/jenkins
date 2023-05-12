@@ -10,9 +10,4 @@
     mysql_password: mypassword
     mysql_database: mydatabase
 
-  handlers:
-  - name: Restart Apache
-    service:
-      name: apache2
-      state: restarted
 
