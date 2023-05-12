@@ -62,14 +62,3 @@
     priv: '*.*:ALL'
     host: 192.168.1.118
     state: present
-
-  handlers:
-  - name: Restart Apache
-    service:
-      name: apache2
-      state: restarted
-
-  - name: Restart MySQL
-    service:
-      name: mysql
-      state: restarted
