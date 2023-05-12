@@ -36,7 +36,7 @@
     name: mysql-server
     state: present
 
-- name: Enable connection from remote hosts
+- name: Enable connection to mysql from remote hosts
   lineinfile:
     path: /etc/mysql/mysql.conf.d/mysqld.cnf
     state: present
